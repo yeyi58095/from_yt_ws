@@ -1,0 +1,5 @@
+<launch>
+	<!-- node name 的名稱要跟在 py檔裡面 init_node 的名稱一樣 -->
+	<node name="publisher_node" type="publisher.py" pkg="pub_sub" output="screen"/>
+	<node name="subscriber_node" type="subscriber.py" pkg="pub_sub" output="screen"/>
+</launch>

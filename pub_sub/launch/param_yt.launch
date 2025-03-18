@@ -1,0 +1,3 @@
+<launch>
+	<rosparam command="load" file="/home/daniel/from_yt_ws/src/pub_sub/config/param_yt.yaml" />
+</launch>
