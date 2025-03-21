@@ -1,0 +1,4 @@
+<launch>
+    <param name="start_delay" value="5"/>
+    <node pkg="auto_nav" type="init_pose.py" name="init_pose" output="screen"/>
+</launch>
