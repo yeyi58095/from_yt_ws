@@ -32,7 +32,7 @@ try:
 
     print("🚀 啟動最終 SLAM 導航 all_done_auto_nav.launch...")
     # 啟動導航任務
-    subprocess.call(["roslaunch", "auto_nav", "all_done_auto_nav.launch"])
+    subprocess.call(["roslaunch", "auto_nav", "start_auto_nav.launch"])
 
 except KeyboardInterrupt:
     print("⛔ 使用者中斷，清理 Gazebo...")
