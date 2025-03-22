@@ -3,9 +3,9 @@
 <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch"/>
 <include file="$(find auto_nav)/launch/turtlebot3_auto_nav.launch"/>
 
-
-<node pkg="auto_nav" type="init_pose.py" name="init_pose" output="screen" respawn="true"/>
 <!--
- <include file="$(find auto_nav)/launch/delayed_init_pose.launch"/>
+<node pkg="auto_nav" type="init_pose.py" name="init_pose" output="screen" respawn="true"/>
 -->
+ <include file="$(find auto_nav)/launch/delayed_init_pose.launch"/>
+
 </launch>
