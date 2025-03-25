@@ -1,0 +1,8 @@
+<launch>
+  <!-- 啟動你的 Python 腳本，它會自己處理 init → 等待 → 關閉 → 再開 SLAM 導航 -->
+  <node pkg="auto_nav"
+        type="start_auto_nav.py"
+        name="start_auto_nav"
+        output="screen"
+        launch-prefix="bash -c" />
+</launch>
