@@ -16,6 +16,23 @@
         </inertia>
         <mass>1.0</mass>
       </inertial>
+	<sensor name="gps_sensor" type="gps">
+  <always_on>1</always_on>
+  <update_rate>10</update_rate> <!-- 10Hz 更新频率 -->
+  <gps>
+    <horizontal_position_noise>0.01</horizontal_position_noise>  <!-- 水平噪声 -->
+    <vertical_position_noise>0.01</vertical_position_noise>  <!-- 垂直噪声 -->
+  </gps>
+  <plugin name="gps_plugin" filename="libgazebo_ros_gps.so">
+    <ros>
+      <namespace>/gps</namespace>
+      <remapping>
+        <from>fix</from>
+        <to>gps/fix</to>
+      </remapping>
+    </ros>
+  </plugin>
+</sensor>
 
       <collision name="base_collision">
         <pose>-0.032 0 0.070 0 0 0</pose>

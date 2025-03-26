@@ -1,0 +1,9 @@
+<launch>
+  <!-- 啟動 Gazebo 空世界 -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+
+  <!-- Spawn 模型 -->
+  <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-sdf -file $(find auto_nav_gps)/models/turtlebot3_burger_with_gps/model.sdf
+              -model turtlebot3_gps -x 0 -y 0 -z 0.1"/>
+</launch>

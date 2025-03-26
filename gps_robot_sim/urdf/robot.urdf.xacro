@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="gps_bot">
+
+  <!-- 主體 -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.4 0.2"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.4 0.2"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <inertia
+        ixx="0.01" ixy="0.0" ixz="0.0"
+        iyy="0.01" iyz="0.0"
+        izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- GPS Plugin -->
+  <gazebo>
+    <plugin name="gps_plugin" filename="libhector_gazebo_ros_gps.so">
+      <topicName>/fix</topicName>
+      <bodyName>base_link</bodyName>
+      <frameName>gps_link</frameName>
+      <updateRate>5.0</updateRate>
+    </plugin>
+  </gazebo>
+
+  <!-- IMU Plugin -->
+  <gazebo>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <topicName>/imu/data</topicName>
+      <bodyName>base_link</bodyName>
+      <frameName>imu_link</frameName>
+      <updateRate>100.0</updateRate>
+    </plugin>
+  </gazebo>
+
+</robot>

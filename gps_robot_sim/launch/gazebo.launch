@@ -1,0 +1,9 @@
+<launch>
+  <!-- 載入 Gazebo -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+
+  <!-- 載入模型 -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find gps_robot_sim)/urdf/robot_with_gps.urdf.xacro'" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args=" -urdf -param robot_description -model gps_bot" />
+</launch>

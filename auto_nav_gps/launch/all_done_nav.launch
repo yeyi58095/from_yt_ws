@@ -3,5 +3,5 @@
 <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch"/>
 <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch"/>
 
-<node pkg="auto_nav" type="init_pose.py" name="init_pose" output="screen"/>
+<node pkg="auto_nav_gps" type="init_pose.py" name="init_pose" output="screen"/>
 </launch>

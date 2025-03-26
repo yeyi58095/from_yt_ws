@@ -1,11 +1,8 @@
 <launch>
-
-<include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch"/>
-<include file="$(find auto_nav)/launch/turtlebot3_auto_nav.launch"/>
-
-
-<node pkg="auto_nav" type="init_pose.py" name="init_pose" output="screen" respawn="true"/>
-<!--
- <include file="$(find auto_nav)/launch/delayed_init_pose.launch"/>
--->
+  <!-- 啟動你的 Python 腳本，它會自己處理 init → 等待 → 關閉 → 再開 SLAM 導航 -->
+  <node pkg="auto_nav_gps"
+        type="start_auto_nav.py"
+        name="start_auto_nav"
+        output="screen"
+        launch-prefix="bash -c" />
 </launch>
