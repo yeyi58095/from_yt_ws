@@ -1,10 +1,10 @@
 <launch>
 
-<include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch"/>
-<include file="$(find auto_nav)/launch/turtlebot3_auto_nav.launch"/>
+<include file="$(find auto_nav_in_hospital)/launch/new_hospital.launch"/>
+<include file="$(find auto_nav_in_hospital)/launch/turtlebot3_auto_nav.launch"/>
 
-<node pkg="auto_nav" type="init_pose.py" name="init_pose" output="screen" respawn="true"/>
+<node pkg="auto_nav_in_hospital" type="init_pose.py" name="init_pose" output="screen" respawn="true"/>
 <!--
- <include file="$(find auto_nav)/launch/delayed_init_pose.launch"/>
+ <include file="$(find auto_nav_in_hospital)/launch/delayed_init_pose.launch"/>
 -->
 </launch>
