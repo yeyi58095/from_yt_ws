@@ -1,0 +1,7 @@
+<launch>
+
+<include file="$(find auto_nav_in_hospital)/launch/turtlebot3_hospital.launch"/>
+<include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch"/>
+
+<node pkg="auto_nav_in_hospital" type="init_pose.py" name="init_pose" output="screen"/>
+</launch>

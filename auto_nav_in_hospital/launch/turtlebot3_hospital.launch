@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="tb3_name" default="R1"/>
+  <arg name="x_pos" default="0.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.0"/>
+  <arg name="yaw"   default="0.0"/>
+
+  <!-- 載入 hospital world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find turtlebot3_hospital_sim)/worlds/pseudo_hospital.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="verbose" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- 機器人模型、state publisher、spawn -->
+  <group ns = "$(arg tb3_name)">
+    <param name="robot_description" command="$(find xacro)/xacro $(find turtlebot3_hospital_sim)/urdf/turtlebot3_burger.urdf.xacro" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="10.0" />
+      <param name="tf_prefix" value="$(arg tb3_name)" />
+    </node>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+          args="-urdf -model $(arg tb3_name) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg yaw) -param robot_description" />
+  </group>
+
+  <!-- 靜態 tf 廣播器 -->
+  <node pkg="tf" type="static_transform_publisher" name="$(arg tb3_name)_broadcaster"
+        args="0 0 0 0 0 0 odom $(arg tb3_name)/odom 10" />
+</launch>
+
