@@ -5,7 +5,13 @@ import os
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 import actionlib
 
-FILE_PATH = "../yamls/positions.yaml"
+import rospkg
+import sys
+import select
+
+rospack = rospkg.RosPack()
+PKG_PATH = rospack.get_path('auto_nav_in_hospital')
+FILE_PATH = os.path.join(PKG_PATH, "yamls", "positions.yaml")
 
 def load_positions():
     if os.path.exists(FILE_PATH):

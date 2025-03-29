@@ -1,0 +1,3 @@
+<launch>
+    <node name="auto_iter_nav_watcher" pkg="auto_nav_in_hospital" type="auto_iter_nav_watcher.py" output="screen" />
+</launch>
