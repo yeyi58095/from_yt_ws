@@ -17,6 +17,5 @@ target = sys.argv[1]
 
 with open(FILE_PATH, "a", encoding="utf-8") as f:
     f.write(target + "\n")
-    f.write(target + "\n")
 
 print(f"✅ 已新增 {target} 到 reserved")
