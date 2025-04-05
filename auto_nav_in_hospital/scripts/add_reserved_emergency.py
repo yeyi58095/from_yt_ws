@@ -2,8 +2,12 @@
 
 import sys
 import os
+import rospkg
 
-FILE_PATH = os.path.join(os.path.dirname(__file__), "../yamls/reserved")
+rospack = rospkg.RosPack()
+PKG_PATH = rospack.get_path('auto_nav_in_hospital')
+EMERGENCY_PATH = os.path.join(PKG_PATH, "yamls", "reserved_emergency")
+NORMAL_PATH = os.path.join(PKG_PATH, "yamls", "reserved")
 
 if len(sys.argv) != 2:
     print("❗️請輸入緊急目的地名稱")
@@ -11,21 +15,30 @@ if len(sys.argv) != 2:
 
 target = sys.argv[1]
 
-# 讀取原本 reserved
-with open(FILE_PATH, "r", encoding="utf-8") as f:
-    lines = [line.strip() for line in f.readlines() if line.strip()]
+# 讀取 emergency
+with open(EMERGENCY_PATH, "r", encoding="utf-8") as f:
+    emergency_lines = [line.strip() for line in f.readlines() if line.strip()]
 
-# 只在不重複時插入
-if not lines or lines[0] != target:
-    lines = [target] + [line for line in lines if line != target]
+# 如果已存在就跳出
+if target in emergency_lines:
+    print(f"⚠️ {target} 已存在於 reserved_emergency，忽略")
+    sys.exit(0)
 
-    with open(FILE_PATH, "w", encoding="utf-8") as f:
-        for line in lines:
+# 如果在 reserved 中，也移除它
+with open(NORMAL_PATH, "r", encoding="utf-8") as f:
+    normal_lines = [line.strip() for line in f.readlines() if line.strip()]
+
+if target in normal_lines:
+    normal_lines.remove(target)
+    with open(NORMAL_PATH, "w", encoding="utf-8") as f:
+        for line in normal_lines:
             f.write(line + "\n")
+    print(f"🧹 已從 reserved 中移除 {target}")
 
-    # 觸發 watchdog：更新時間戳
-    os.utime(FILE_PATH, None)
+# 加入到 reserved_emergency 的結尾
+emergency_lines.append(target)
+with open(EMERGENCY_PATH, "w", encoding="utf-8") as f:
+    for line in emergency_lines:
+        f.write(line + "\n")
 
-    print(f"🚨 已插入緊急目的地：{target}")
-else:
-    print(f"⚠️ {target} 已經是當前目的地，不需重複插入")
+print(f"🚨 已插入緊急目的地：{target}")
