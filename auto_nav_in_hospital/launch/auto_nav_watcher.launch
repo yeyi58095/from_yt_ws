@@ -1,0 +1,3 @@
+<launch>
+    <node name="auto_nav_manager" pkg="auto_nav_in_hospital" type="auto_nav_manager.py" output="screen" />
+</launch>
